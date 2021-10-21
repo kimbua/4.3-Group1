@@ -49,22 +49,22 @@ studentController.getStudent = (req, res, next) => {
   }
 };
 
-// studentController.createStudent = (req, res, next) => {
-//   const { age, name } = req.body;
-//   const id = generateRandomHexString(24);
+studentController.createStudent = (req, res, next) => {
+  const { age, name } = req.body;
+  const id = generateRandomHexString(24);
 
-//   try {
-//     if (!age || !name) {
-//       res.status(400).send("Missing student's information");
-//     }
-//     const newStudentInfo = { id, name, age };
-//     console.log(newStudentInfo);
-//     const newStudentInfoJson = JSON.stringify(newStudentInfo);
-//     fs.writeFileSync("db.json", newStudentInfoJson, { flag: "a" });
-//     res.status(200).send(`Sucessfully create new student info`);
-//   } catch (error) {
-//     next(error);
-//   }
-//   res.status(200).send(req.body);
-// };
+  try {
+    if (!age || !name) {
+      res.status(400).send("Missing student's information");
+    }
+    const newStudentInfo = { id, name, age };
+    objData.push(newStudentInfo);
+    const newDataJson = JSON.stringify(objData);
+    fs.writeFileSync("db.json", newDataJson);
+    res.status(200).send(`Sucessfully create new student info`);
+  } catch (error) {
+    next(error);
+  }
+  res.status(200).send(req.body);
+};
 module.exports = studentController;
