@@ -1,16 +1,24 @@
 var express = require("express");
 var router = express.Router();
+const {
+  getStudent,
+  createStudent,
+} = require("../controllers/student.controller");
 
 // GET
 // url: /api/student
 // access: public
 // description: get list of students
+
 const {
   getStudent,
   createStudent,
   deleteStudent,
 } = require("../controllers/student.controller");
 // router.get("/", getStudent);
+
+router.get("/", getStudent);
+
 
 // POST
 // url: /api/student

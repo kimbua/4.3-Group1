@@ -49,10 +49,11 @@ studentController.getStudent = (req, res, next) => {
   }
 };
 
-// studentController.createStudent = (req, res, next) => {
-//   const { age, name } = req.body;
-//   const id = generateRandomHexString(24);
+studentController.createStudent = (req, res, next) => {
+  const { age, name } = req.body;
+  const id = generateRandomHexString(24);
 
+<<<<<<< HEAD
 //   try {
 //     if (!age || !name) {
 //       res.status(400).send("Missing student's information");
@@ -92,4 +93,20 @@ studentController.deleteStudent = (req, res, next) => {
    next(error);
    };
 }
+=======
+  try {
+    if (!age || !name) {
+      res.status(400).send("Missing student's information");
+    }
+    const newStudentInfo = { id, name, age };
+    objData.push(newStudentInfo);
+    const newDataJson = JSON.stringify(objData);
+    fs.writeFileSync("db.json", newDataJson);
+    res.status(200).send(`Sucessfully create new student info`);
+  } catch (error) {
+    next(error);
+  }
+  res.status(200).send(req.body);
+};
+>>>>>>> 3503fbc4f10b6d37d7afeca47153c35be28bcb9a
 module.exports = studentController;
