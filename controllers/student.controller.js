@@ -52,22 +52,21 @@ studentController.getStudent = (req, res, next) => {
 studentController.createStudent = (req, res, next) => {
   const { age, name } = req.body;
   const id = generateRandomHexString(24);
+  try {
+    if (!age || !name) {
+      res.status(400).send("Missing student's information");
+    }
+    const newStudentInfo = { id, name, age };
+    objData.push(newStudentInfo);
+    const newDataJson = JSON.stringify(objData);
+    fs.writeFileSync("db.json", newDataJson);
+    res.status(200).send(`Sucessfully create new student info`);
+  } catch (error) {
+    next(error);
+  }
+  res.status(200).send(req.body);
+};
 
-<<<<<<< HEAD
-//   try {
-//     if (!age || !name) {
-//       res.status(400).send("Missing student's information");
-//     }
-//     const newStudentInfo = { id, name, age };
-//     console.log(newStudentInfo);
-//     const newStudentInfoJson = JSON.stringify(newStudentInfo);
-//     fs.writeFileSync("db.json", newStudentInfoJson, { flag: "a" });
-//     res.status(200).send(`Sucessfully create new student info`);
-//   } catch (error) {
-//     next(error);
-//   }
-//   res.status(200).send(req.body);
-// };
 
 studentController.deleteStudent = (req, res, next) => {
   const {id} = req.params;
@@ -93,20 +92,7 @@ studentController.deleteStudent = (req, res, next) => {
    next(error);
    };
 }
-=======
-  try {
-    if (!age || !name) {
-      res.status(400).send("Missing student's information");
-    }
-    const newStudentInfo = { id, name, age };
-    objData.push(newStudentInfo);
-    const newDataJson = JSON.stringify(objData);
-    fs.writeFileSync("db.json", newDataJson);
-    res.status(200).send(`Sucessfully create new student info`);
-  } catch (error) {
-    next(error);
-  }
-  res.status(200).send(req.body);
-};
->>>>>>> 3503fbc4f10b6d37d7afeca47153c35be28bcb9a
+
+
+
 module.exports = studentController;
