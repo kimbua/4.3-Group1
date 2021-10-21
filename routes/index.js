@@ -3,16 +3,12 @@ var router = express.Router();
 
 // GET home page.
 router.get("/", function (req, res, next) {
-  res.send("Welcome your Simple CRUD API works");
+  res.send("Welcome to your Simple CRUD API that actually works");
 });
 
-// GET user route
+// GET student route
 // url: /api/student
 const studentApi = require("./student.api");
 router.use("/student", studentApi);
 
-// GET user route
-// url: /api/user
-// const userRoute = require("./user.api");
-// router.use("/user", userRoute);
 module.exports = router;
