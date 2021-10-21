@@ -67,4 +67,29 @@ studentController.getStudent = (req, res, next) => {
 //   }
 //   res.status(200).send(req.body);
 // };
+
+studentController.deleteStudent = (req, res, next) => {
+  const {id} = req.params;
+  console.log(id);
+  try{
+    //read the file => return JSON
+    const database = fs.readFileSync("db.json", "utf8"); 
+    //trans to JS object
+    const jsonObject = JSON.parse(database);
+    console.log(jsonObject.data);
+    //remove all id match 
+    const afterFilter = jsonObject.filter((e) => e.id !==id);
+    //trans to JSON 
+    const newData = JSON.stringify(afterFilter);
+    //then writie to DBJSON
+    fs.writeFileSync("db.json", newData);
+    // console.log(jsonObject)
+
+    return res.status(200).send(`successfully delete id ${id}`)
+
+   }
+   catch(error){
+   next(error);
+   };
+}
 module.exports = studentController;
