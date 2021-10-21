@@ -1,6 +1,5 @@
 const studentController = {};
 const fs = require("fs");
-const crypto = require("crypto");
 let jsonData = fs.readFileSync("db.json", "utf8");
 let objData = JSON.parse(jsonData);
 const { generateRandomHexString } = require("../utilsHelper/ultils.helper");
@@ -67,32 +66,27 @@ studentController.createStudent = (req, res, next) => {
   res.status(200).send(req.body);
 };
 
-
 studentController.deleteStudent = (req, res, next) => {
-  const {id} = req.params;
+  const { id } = req.params;
   console.log(id);
-  try{
+  try {
     //read the file => return JSON
-    const database = fs.readFileSync("db.json", "utf8"); 
+    const database = fs.readFileSync("db.json", "utf8");
     //trans to JS object
     const jsonObject = JSON.parse(database);
     console.log(jsonObject.data);
-    //remove all id match 
-    const afterFilter = jsonObject.filter((e) => e.id !==id);
-    //trans to JSON 
+    //remove all id match
+    const afterFilter = jsonObject.filter((e) => e.id !== id);
+    //trans to JSON
     const newData = JSON.stringify(afterFilter);
     //then writie to DBJSON
     fs.writeFileSync("db.json", newData);
     // console.log(jsonObject)
 
-    return res.status(200).send(`successfully delete id ${id}`)
-
-   }
-   catch(error){
-   next(error);
-   };
-}
-
-
+    return res.status(200).send(`successfully delete id ${id}`);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = studentController;
