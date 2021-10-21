@@ -3,6 +3,7 @@ const fs = require("fs");
 let jsonData = fs.readFileSync("db.json", "utf8");
 let objData = JSON.parse(jsonData);
 const { generateRandomHexString } = require("../utilsHelper/ultils.helper");
+
 studentController.getStudent = (req, res, next) => {
   const { age, name, limit } = req.query;
   try {
